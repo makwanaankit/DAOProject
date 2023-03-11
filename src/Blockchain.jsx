@@ -6,7 +6,7 @@ const { ethereum } = window; //fewtching metamask object from window which in do
 
 window.web3 = new Web3(ethereum);
 window.web3 = new Web3(window.web3.currentProvider);
-
+// above Both the line are same
 const connectWallet = async () => {
   try {
     if (!ethereum) {
@@ -47,14 +47,14 @@ const getEthereumContract = async () => {
   const connectedAccount = getGlobalState("connectedAccount");
   if (connectedAccount) {
     const web3 = window.web3;
-    const networkId = await web3.eth.net.getId();
-    const networkData = await abi.networks[networkId];
-    if (networkData) {
-      const contract = new web3.eth.Contract(abi.abi.networkData.address);
-      return contract;
-    } else {
-      return null;
-    }
+    // const networkId = await web3.eth.net.getId();
+    // const networkData = await abi.networks[networkId];
+    // if (networkData) {
+    const contract = new web3.eth.Contract(abi.abi.address);
+    return contract;
+    // } else {
+    //   return null;
+    // }
   } else {
     return getGlobalState("contract");
   }
